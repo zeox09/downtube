@@ -1,15 +1,29 @@
-from pytubefix import YouTube
-from pytubefix.cli import on_progress
+import yt_dlp
+import yt_dlp.YoutubeDL
 
-url = "https://www.youtube.com/watch?v=Jdxr2hTj2cY"
 
-yt = YouTube(url, on_progress_callback=on_progress)
-print(yt.title)
-version = yt.streams.filter(res='720p')
-audio = yt.streams.filter(only_audio=True)
-print(version)
-print(audio)
-# stream = yt.streams.get_by_itag(398)
-# stream.download()
-A_down = yt.streams.get_by_itag(139)
-A_down.download()
+def downtube(link):
+    ydl_opts = {
+        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best',
+        'outtmpl': '%(tittle)s.%(ext)s',
+        'merge_output_format': 'mp4',
+
+        'postprocessors': [
+            {
+                'key': 'FFmpegVideoConvertor',
+                'preferedformat': 'mp4'
+            }
+        ]
+    }
+
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([link])
+            print("successful download")
+    except Exception as e:
+        print(f"There was a problem downloading: {e}")
+
+
+link = str(input("pega el link del video a descargar: ")).strip()
+
+downtube(link)
