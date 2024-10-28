@@ -8,7 +8,7 @@ from yt_dlp import YoutubeDL
 def downtube(link):
     ydl_opts = {
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best',
-        'outtmpl': '%(title)s.%(ext)s',
+        'outtmpl': 'D:/videoyoutube/%(title)s.%(ext)s',
         'merge_output_format': 'mp4',
         'postprocessors': [
             {
@@ -40,6 +40,8 @@ def on_download():
     link = url.get()
     downtube(link)
 
+
+window.iconbitmap('./dt.ico')
 
 button = customtkinter.CTkButton(window, text="Download", command=on_download)
 
