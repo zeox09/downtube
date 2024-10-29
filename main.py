@@ -8,7 +8,7 @@ from yt_dlp import YoutubeDL
 def downtube(link):
     ydl_opts = {
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best',
-        'outtmpl': 'D:/videoyoutube/%(title)s.%(ext)s',
+        'outtmpl': 'D:/descargas/%(title)s.%(ext)s',
         'merge_output_format': 'mp4',
         'postprocessors': [
             {
